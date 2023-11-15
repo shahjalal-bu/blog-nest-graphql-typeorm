@@ -8,6 +8,10 @@ export class User {
   id: number;
   @Field()
   name: string;
+  @Field()
+  role: string;
+  @Field()
+  email: string;
   @Field((type) => Address, { nullable: true })
   address?: Address;
   @Field((type) => [Post], { nullable: true })

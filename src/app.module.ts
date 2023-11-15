@@ -1,12 +1,15 @@
+import { AuthModule } from './auth/auth.module';
 import { ApolloDriver } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
+import { AppResolver } from './app.resolver';
 
 @Module({
   imports: [
+    AuthModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -23,8 +26,9 @@ import { PostModule } from './post/post.module';
     }),
     UserModule,
     PostModule,
+    AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [AppResolver],
 })
 export class AppModule {}

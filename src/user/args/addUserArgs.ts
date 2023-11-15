@@ -5,4 +5,10 @@ export class AddUserArgs {
   name: string;
   @Field()
   street: string;
+  @Field()
+  email: string;
+  @Field()
+  password: string;
+  @Field()
+  role: string;
 }
