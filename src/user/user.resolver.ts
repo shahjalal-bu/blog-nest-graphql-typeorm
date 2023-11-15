@@ -2,6 +2,7 @@ import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { User } from './schema/user.schema';
 import { UserService } from './user.service';
 import { AddUserArgs } from './args/addUserArgs';
+import { UsePipes, ValidationPipe } from '@nestjs/common';
 
 @Resolver((of) => User)
 export class UserResolver {
@@ -12,6 +13,7 @@ export class UserResolver {
     return this.userService.getUsers();
   }
   @Mutation((returns) => String)
+  @UsePipes(new ValidationPipe())
   async addUser(@Args('addUserArgs') addUserArgs: AddUserArgs) {
     return this.userService.addUser(addUserArgs);
   }

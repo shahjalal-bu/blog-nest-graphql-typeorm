@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { PostEntity } from './entity/post.entity';
 import { AddPostArgs } from './args/addPostArg';
 import { UserEntity } from 'src/user/entity/user.entity';
+import { userPayload } from 'src/type/type';
 
 @Injectable()
 export class PostService {
@@ -16,9 +17,12 @@ export class PostService {
   async getPosts(): Promise<PostEntity[]> {
     return this.postRepo.find({ relations: ['author'] });
   }
-  async addPost(addPostArgs: AddPostArgs): Promise<string> {
+  async addPost(
+    signedUser: userPayload,
+    addPostArgs: AddPostArgs,
+  ): Promise<string> {
     const user: UserEntity = await this.userRepo.findOne({
-      where: { id: addPostArgs.authorId },
+      where: { id: signedUser.id },
     });
     if (user) {
       const post = this.postRepo.create({

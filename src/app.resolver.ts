@@ -3,6 +3,7 @@ import { Args, Context, Query, Resolver } from '@nestjs/graphql';
 import { AuthGuard } from './auth/auth.guard';
 import { UserEntity } from './user/entity/user.entity';
 import * as jwt from 'jsonwebtoken';
+import { userPayload } from './type/type';
 
 @Resolver((of) => String)
 export class AppResolver {
@@ -18,13 +19,12 @@ export class AppResolver {
     @Args({ name: 'password', type: () => String }) password: string,
     @Context('user') user: UserEntity,
   ): string {
-    console.log('email', email);
-    const payload = {
+    const payload: userPayload = {
       id: user.id,
       name: user.name,
       email: user.email,
       role: user.role,
     };
-    return jwt.sign(payload, 'changeLater', { expiresIn: '60s' });
+    return jwt.sign(payload, 'changeLater', { expiresIn: '15m' });
   }
 }

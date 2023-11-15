@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { UserEntity } from './entity/user.entity';
 import { AddUserArgs } from './args/addUserArgs';
 import { AddressEntity } from 'src/address/entity/address.entity';
+import { makeHashedPassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class UserService {
@@ -25,7 +26,7 @@ export class UserService {
   async addUser(addUserArgs: AddUserArgs): Promise<string> {
     const name = addUserArgs.name;
     const street = addUserArgs.street;
-    const password = addUserArgs.password;
+    const password = await makeHashedPassword(addUserArgs.password);
     const role = addUserArgs.role;
     const email = addUserArgs.email;
     const address = this.addressRepo.create({ street });

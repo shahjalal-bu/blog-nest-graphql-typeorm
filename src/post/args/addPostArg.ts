@@ -6,6 +6,6 @@ export class AddPostArgs {
   title: string;
   @Field()
   body: string;
-  @Field((type) => ID)
-  authorId: number;
+  // @Field((type) => ID)
+  // authorId: number;
 }
