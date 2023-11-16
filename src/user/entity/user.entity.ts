@@ -49,7 +49,7 @@ export class UserEntity {
     onDelete: 'CASCADE',
   })
   @JoinColumn()
-  comments: CommentEntity[];
+  comments?: CommentEntity[];
 }
 
 // user.entity.ts

@@ -22,6 +22,8 @@ export class PostEntity {
   })
   author: UserEntity;
   @OneToMany(() => CommentEntity, (comment) => comment.post, {
+    cascade: true,
+    eager: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })

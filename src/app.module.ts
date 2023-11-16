@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { AppResolver } from './app.resolver';
+import { CommentModule } from './comment/commnet.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AppResolver } from './app.resolver';
     }),
     UserModule,
     PostModule,
+    CommentModule,
     AuthModule,
   ],
   controllers: [],

@@ -9,7 +9,8 @@ export class CommentEntity {
 
   @Column()
   text: string;
-
+  @Column()
+  createdBy: string;
   @ManyToOne(() => UserEntity, (user) => user.comments)
   author: UserEntity;
 

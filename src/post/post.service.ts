@@ -15,7 +15,9 @@ export class PostService {
     private readonly userRepo: Repository<UserEntity>,
   ) {}
   async getPosts(): Promise<PostEntity[]> {
-    return this.postRepo.find({ relations: ['author'] });
+    return this.postRepo.find({
+      relations: ['author', 'comments'],
+    });
   }
   async addPost(
     signedUser: userPayload,
